@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimonies</title>
+</head>
+<body>
+    <h1>Testimonies</h1>
+    <a href="{% url 'add_testimony' %}">Add Testimony</a>
+    <ul>
+        {% for testimony in testimonies %}
+            <li>
+                <a href="{% url 'testimony_detail' testimony.pk %}">{{ testimony.name }}</a> - {{ testimony.created_at }}
+            </li>
+        {% empty %}
+            <li>No testimonies yet.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'project_list' %}">Back to Home</a>
+</body>
+</html>
