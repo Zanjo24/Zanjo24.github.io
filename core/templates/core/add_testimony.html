@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Testimony</title>
+</head>
+<body>
+    <h1>Add Your Testimony</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Testimony</button>
+    </form>
+    <br>
+    <a href="{% url 'testimony_list' %}">View All Testimonies</a>
+</body>
+</html>

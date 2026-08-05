@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimony Detail</title>
+</head>
+<body>
+    <h1>Testimony from {{ testimony.name }}</h1>
+    <p>{{ testimony.message }}</p>
+    <p><small>Submitted on: {{ testimony.created_at }}</small></p>
+    <br>
+    <a href="{% url 'testimony_list' %}">Back to Testimonies</a>
+</body>
+</html>
