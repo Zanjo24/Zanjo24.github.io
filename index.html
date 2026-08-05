@@ -95,9 +95,12 @@
             <h2 class="fw-bold mb-3">Message and Get in Touch with Me!</h2>
             <p class="lead text-muted mb-4">Have a question? Feel free to reach out.</p>
             <div class="d-flex justify-content-center gap-3">
-                <a href="mailto:asmeneses1@student.hau.edu.ph" class="btn btn-primary btn-lg px-4 rounded-pill fw-bold shadow-sm">Email Me</a>
-                <a href="https://github.com/Zanjo24" target="_blank" class="btn btn-outline-dark btn-lg px-4 rounded-pill fw-bold">GitHub</a>
-            </div>
+    <a href="mailto:asmeneses1@student.hau.edu.ph" class="btn btn-outline-primary btn-lg px-4 rounded-pill">Email Me</a>
+    <a href="https://github.com/Zanjo24" target="_blank" class="btn btn-outline-dark btn-lg px-4 rounded-pill">GitHub</a>
+    <a href="{% url 'add_project' %}" class="btn btn-outline-success btn-lg px-4 rounded-pill">Add Project</a>
+    <a href="{% url 'testimony_list' %}" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">Testimonials</a>
+    <a href="{% url 'contact' %}" class="btn btn-outline-info btn-lg px-4 rounded-pill">Contact Form</a>
+</div>
         </div>
     </section>
 
