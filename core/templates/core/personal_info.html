@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Information</title>
+</head>
+<body>
+    <h1>Personal Information</h1>
+    {% if personal_info %}
+        <p><strong>Name:</strong> {{ personal_info.first_name }} {{ personal_info.last_name }}</p>
+        <p><strong>Summary:</strong> {{ personal_info.summary }}</p>
+        <p><strong>Email:</strong> {{ personal_info.email }}</p>
+        <p><strong>Contact Number:</strong> {{ personal_info.contact_number }}</p>
+        <p><strong>Address:</strong> {{ personal_info.address }}</p>
+    {% else %}
+        <p>No personal information provided yet.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
