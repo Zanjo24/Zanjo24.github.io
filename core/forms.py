@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, TechStack, Testimony, Inquiry
+from .models import Project, TechStack, Testimony
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -21,13 +21,4 @@ class TestimonyForm(forms.ModelForm):
         fields = ['full_name', 'content']
         widgets = {
             'content': forms.Textarea(attrs={'rows': 3}),
-        }
-
-class InquiryForm(forms.ModelForm):
-    class Meta:
-        model = Inquiry
-        fields = ['first_name', 'last_name', 'contact_number', 'email', 'address', 'message']
-        widgets = {
-            'address': forms.Textarea(attrs={'rows': 2}),
-            'message': forms.Textarea(attrs={'rows': 4}),
         }

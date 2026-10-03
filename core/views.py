@@ -16,7 +16,7 @@ def project_detail(request, project_id):
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 from .models import Project, Testimony, Inquiry
-from .forms import ProjectForm, InquiryForm, TestimonyForm
+from .forms import ProjectForm, TestimonyForm
 
 def add_project(request):
     if request.method == 'POST':
@@ -64,7 +64,7 @@ def testimony_detail(request, pk):
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import user_passes_test
-from .forms import ProjectForm, InquiryForm, TestimonyForm, TechStackForm
+from .forms import ProjectForm, TestimonyForm, TechStackForm
 from .models import Project, TechStack, Testimony, Inquiry, PersonalInformation
 
 def admin_login_view(request):
