@@ -23,13 +23,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'testimony_list' %}">Testimonies</a></li>
+                    
+                    
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link text-warning fw-bold ms-lg-2" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li class="nav-item ms-lg-2">
+                            <form action="{% url 'admin_logout' %}" method="POST" class="d-inline m-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-info btn-sm fw-bold text-dark px-3" href="{% url 'admin_login' %}">Admin Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
-        </div>
     </nav>
 
     <section id="about" class="bg-dark text-light py-5 d-flex align-items-center" style="min-height: 80vh;">

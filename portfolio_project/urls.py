@@ -14,6 +14,7 @@ urlpatterns = [
     path('testimonies/', views.TestimonyListView.as_view(), name='testimony_list'),
     path('testimony/<int:pk>/', views.testimony_detail, name='testimony_detail'),
     # New admin & dashboard routes:
+    path('logout/', views.admin_logout_view, name='admin_logout'),
     path('login/', views.admin_login_view, name='admin_login'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('tech-stack/add/', views.add_tech_stack, name='add_tech_stack'),
