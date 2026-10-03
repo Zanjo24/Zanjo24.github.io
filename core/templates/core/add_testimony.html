@@ -2,16 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Testimony</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Project</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Add Your Testimony</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit Testimony</button>
-    </form>
-    <br>
-    <a href="{% url 'testimony_list' %}">View All Testimonies</a>
+<body class="bg-light">
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body p-4 p-md-5">
+                        <h2 class="fw-bold mb-4 text-center">Add a New Project</h2>
+                        
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+
+                            
+                            {% for field in form %}
+                                <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                                    
+                                    {{ field }}
+
+                                    {% if field.help_text %}
+                                        <div class="form-text text-muted">{{ field.help_text }}</div>
+                                    {% endif %}
+                                    
+                                    {% for error in field.errors %}
+                                        <div class="text-danger small mt-1">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+
+                            
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Save Project</button>
+                                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Back to Projects</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        input[type="text"], input[type="url"], input[type="email"], textarea, select {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+        input[type="text"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
+            border-color: #86b7fe;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+    
+        input[type="checkbox"] {
+            width: 1.15em;
+            height: 1.15em;
+            margin-top: 0.2em;
+            vertical-align: top;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.25em;
+            cursor: pointer;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
