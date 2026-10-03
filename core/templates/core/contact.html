@@ -2,16 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact Us</title>
+    <title>Contact</title>
 </head>
 <body>
-    <h1>Contact / Inquiry</h1>
+    <h1>Contact Me</h1>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Send Inquiry</button>
+        <div>
+            <label>First Name:</label><br>
+            <input type="text" name="first_name" required>
+        </div>
+        <div>
+            <label>Last Name:</label><br>
+            <input type="text" name="last_name" required>
+        </div>
+        <div>
+            <label>Contact Number:</label><br>
+            <input type="text" name="contact_number">
+        </div>
+        <div>
+            <label>Email:</label><br>
+            <input type="email" name="email" required>
+        </div>
+        <div>
+            <label>Address:</label><br>
+            <textarea name="address"></textarea>
+        </div>
+        <div>
+            <label>Message:</label><br>
+            <textarea name="message" required></textarea>
+        </div>
+        <br>
+        <button type="submit">Submit</button>
     </form>
-    <br>
-    <a href="{% url 'project_list' %}">Back to Home</a>
 </body>
 </html>

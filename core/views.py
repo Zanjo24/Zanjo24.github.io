@@ -23,20 +23,25 @@ def add_project(request):
         form = ProjectForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('home')
     else:
         form = ProjectForm()
     return render(request, 'core/add_project.html', {'form': form})
 
+from .models import Project, Testimony, Inquiry, PersonalInformation 
+
 def contact_view(request):
     if request.method == 'POST':
-        form = InquiryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('contact')
-    else:
-        form = InquiryForm()
-    return render(request, 'core/contact.html', {'form': form})
+        Inquiry.objects.create(
+            first_name=request.POST.get('first_name'),
+            last_name=request.POST.get('last_name'),
+            contact_number=request.POST.get('contact_number'),
+            email=request.POST.get('email'),
+            address=request.POST.get('address'),
+            message=request.POST.get('message')
+        )
+        return redirect('contact')
+    return render(request, 'core/contact.html')
 
 def add_testimony(request):
     if request.method == 'POST':
@@ -56,3 +61,48 @@ class TestimonyListView(ListView):
 def testimony_detail(request, pk):
     testimony = get_object_or_404(Testimony, pk=pk)
     return render(request, 'core/testimony_detail.html', {'testimony': testimony})
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import user_passes_test
+from .forms import ProjectForm, InquiryForm, TestimonyForm, TechStackForm
+from .models import Project, TechStack, Testimony, Inquiry, PersonalInformation
+
+def admin_login_view(request):
+    error_message = None
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            if user.is_superuser:
+                login(request, user)
+                return redirect('dashboard')
+            else:
+                error_message = "Access denied. Admin/superuser credentials required."
+        else:
+            error_message = "Invalid username or password."
+            
+    return render(request, 'core/admin_login.html', {'error_message': error_message})
+
+
+@user_passes_test(lambda u: u.is_superuser, login_url='admin_login')
+def dashboard_view(request):
+    projects = Project.objects.all()
+    tech_stacks = TechStack.objects.all()
+    return render(request, 'core/dashboard.html', {
+        'projects': projects,
+        'tech_stacks': tech_stacks,
+    })
+
+
+@user_passes_test(lambda u: u.is_superuser, login_url='admin_login')
+def add_tech_stack(request):
+    if request.method == 'POST':
+        form = TechStackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = TechStackForm()
+    return render(request, 'core/add_tech_stack.html', {'form': form})

@@ -10,7 +10,7 @@
     <ul>
         {% for testimony in testimonies %}
             <li>
-                <a href="{% url 'testimony_detail' testimony.pk %}">{{ testimony.name }}</a> - {{ testimony.created_at }}
+                <a href="{% url 'testimony_detail' testimony.pk %}">{{ testimony.full_name }}</a>
             </li>
         {% empty %}
             <li>No testimonies yet.</li>
