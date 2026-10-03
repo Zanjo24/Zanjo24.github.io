@@ -106,3 +106,9 @@ def add_tech_stack(request):
     else:
         form = TechStackForm()
     return render(request, 'core/add_tech_stack.html', {'form': form})
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def admin_logout_view(request):
+    logout(request)
+    return redirect('home')
